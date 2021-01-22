@@ -30,6 +30,8 @@ print('\nPraying to the bitrate gods for ' + str(processing_time) + ' secs, they
 task = (['ffmpeg', '-i', full_filename, '-acodec', 'copy', '-vcodec', 'libx264', 'test_default.mkv'])
 try:
   output = subprocess.run(task, timeout = processing_time, text = True, stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
+  print("The video is probably too short to be useful, perhaps delete it?\n")
+  exit()
 except subprocess.TimeoutExpired as error_instance:
   if os.path.isfile('test_default.mkv'):
     os.remove('test_default.mkv')
